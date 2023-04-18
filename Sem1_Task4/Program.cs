@@ -1,21 +1,19 @@
 ﻿Console.Write("Введите первое число: ");
-string num_a = Console.ReadLine();
+int num_a = Convert.ToInt32(Console.ReadLine());
 Console.Write("Введите второе число: ");
-string num_b = Console.ReadLine();
+int num_b = Convert.ToInt32(Console.ReadLine());
 Console.Write("Введите третье число: ");
-string num_c = Console.ReadLine();
-int a = int.Parse(num_a);
-int b = int.Parse(num_b);
-int c = int.Parse(num_c);
-int max = a;
+int num_c = Convert.ToInt32(Console.ReadLine());
 
-if(b>max)
+int max = num_a;
+
+if(num_b>max)
 {
-    max = b;
+    max = num_b;
 }
-if(c>max)
+if(num_c>max)
 {
-    max = c;
+    max = num_c;
 }
 Console.Write("max = ");
 Console.WriteLine(max);

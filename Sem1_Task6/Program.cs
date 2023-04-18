@@ -1,6 +1,6 @@
 ﻿Console.Write("Введите число: ");
-string num_a = Console.ReadLine();
-if(int.Parse(num_a)%2==0)
+int num_a = Convert.ToInt32(Console.ReadLine());
+if(num_a%2==0)
 {
     Console.WriteLine("Да");
 }
