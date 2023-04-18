@@ -6,7 +6,7 @@ for i in range(N_neg, N+1):
 */
 System.Console.Write("Введите число N: ");
 int N = Convert.ToInt32(Console.ReadLine());
-for(int i=(N-(2*N)); i<N; i++){
+for(int i=-N; i<N; i++){
     System.Console.Write(i+", ");
 }
 System.Console.WriteLine(N);
