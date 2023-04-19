@@ -2,10 +2,10 @@
 */
 
 Console.Write("Введите первое число: ");
-string num_1 = Console.ReadLine();
+int num_1 = Convert.ToInt32(Console.ReadLine());
 Console.Write("Введите второе число: ");
-string num_2 = Console.ReadLine();
-if(Convert.ToInt32(num_1)==(Convert.ToInt32(num_2))*(Convert.ToInt32(num_2)))
+int num_2 = Convert.ToInt32(Console.ReadLine());
+if(num_1==num_2*num_2)
 {
     Console.WriteLine("Да");
 }
