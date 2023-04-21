@@ -8,14 +8,10 @@ if len(N)==2:
 else:
     print("Введено неверное число")
 */
-System.Console.Write("Введите число от 10 до 99: ");
-int N = System.Convert.ToInt32(System.Console.ReadLine());
-if(N>=10 && N<=99){
-    if(N/10>N%10){
-        System.Console.WriteLine(N/10);
-    } else {
-        System.Console.WriteLine(N%10);
-    }
+
+int N = new Random().Next(10, 100);
+if(N/10>N%10){
+    System.Console.WriteLine(N/10);
 } else {
-    System.Console.WriteLine("Введено неверное число");
+    System.Console.WriteLine(N%10);
 }
