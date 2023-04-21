@@ -4,7 +4,7 @@
 
 string GetCube(int x)
 {
-    string line = ($"{x}x{x}x{x}={Math.Pow(x, 3)}");
+    string line = ($"{x} x {x} x {x} = {Math.Pow(x, 3)}");
     return line;
 }
 System.Console.Write("Введите число N: ");

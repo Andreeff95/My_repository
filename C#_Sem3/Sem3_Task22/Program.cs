@@ -5,7 +5,7 @@
 
 string GetQuart(int x)
 {
-    string line = ($"{x}x{x}={Math.Pow(x, 2)}");
+    string line = ($"{x} x {x} = {Math.Pow(x, 2)}");
     return line;
 }
 System.Console.Write("Введите число N: ");
