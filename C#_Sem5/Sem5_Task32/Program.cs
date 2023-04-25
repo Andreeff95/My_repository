@@ -35,6 +35,6 @@ void ChangeArray(int[] arr)
 }
 
 RandArray(my_array);
-System.Console.WriteLine(PrintArray2(my_array));
+System.Console.WriteLine($"[{PrintArray2(my_array)}]");
 ChangeArray(my_array);
-System.Console.WriteLine(PrintArray2(my_array));
+System.Console.WriteLine($"[{PrintArray2(my_array)}]");
