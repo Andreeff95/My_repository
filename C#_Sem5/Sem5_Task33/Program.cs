@@ -14,15 +14,6 @@ void RandArray(int[] arr)
     }
 }
 
-// void PrintArray1(int[] arr)
-// {
-//     foreach(var v in arr)
-//     {
-//         System.Console.Write($"{v}, ");
-//     }
-//     System.Console.WriteLine("");
-// }
-
 string PrintArray2(int[] arr)
 {
     string res = "";
