@@ -49,11 +49,13 @@ void GetMean(int[,] arr)
         {
             sum+=arr[i,j];
         }
-        double mean = sum/arr.GetLength(0);
+        double mean = Math.Round(sum/arr.GetLength(0), 2);
         arr_mean[j] = mean;
     }
     PrintArray(arr_mean);
 }
+
+
 
 CreateAndPrintMatrix(my_array);
 System.Console.WriteLine();
