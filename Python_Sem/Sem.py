@@ -17,6 +17,13 @@ def Py_Sem():
         case "13": Task13()
         case "14": Task14()
         case "15": Task15()
+        case "16": Task16()
+        case "17": Task17()
+        case "18": Task18()
+        case "19": Task19()
+        case "20": Task20()
+        case "21": Task21()
+        case "23": Task23()
         case _:
             print('Неверный номер задачи!')
             Py_Sem()
@@ -336,6 +343,170 @@ def Task15():
         if weight < min: min = weight 
         if weight > max: max = weight 
     print(min, max)
+    Py_Sem()
+def Task16():
+    """
+    Требуется вычислить, сколько раз встречается некоторое
+    число X в массиве A[1..N]. Пользователь в первой строке вводит
+    натуральное число N – количество элементов в массиве. В последующих
+    строках записаны N целых чисел A. Последняя строка содержит число X
+    Input: 5, 1 2 3 4 5, 3
+    Output: 1
+    """
+    print("ЗАДАЧА 16")
+    list = []
+    N = int(input("Введите количество элементов в массиве: "))
+    for i in range(N):
+        list.append(int(input(f"Введите {i+1} число: "))) 
+    X = int(input("Введите число X: "))
+    total = 0
+    for item in list:
+        total+=1 if item == X else 0
+    print(total)
+    Py_Sem()
+def Task17():
+    """
+    Дан список чисел. Определите, сколько в нем
+    встречается различных чисел.
+    Input: [1, 1, 2, 0, -1, 3, 4, 4]
+    Output: 6
+    """
+    print("ЗАДАЧА 17")
+    from random import randint
+    list_1 = [randint(-5, 5) for i in range(8)]
+    print(list_1)
+    print(len(set(list_1)))
+    Py_Sem()
+def Task18():
+    """
+    Требуется найти в массиве A[1..N] самый близкий по
+    величине элемент к заданному числу X. Пользователь в первой строке
+    вводит натуральное число N – количество элементов в массиве. В
+    последующих строках записаны N целых чисел A. Последняя строка
+    содержит число X
+    Input: 5, 1 2 3 4 5, 6
+    Output: 5
+    """
+    print("ЗАДАЧА 18")
+    list = []
+    N = int(input("Введите количество элементов в массиве: "))
+    for i in range(N):
+        list.append(int(input(f"Введите {i+1} число: "))) 
+    X = int(input("Введите число X: "))
+    elem = list[0]
+    diff = abs(X-list[0])
+    for item in list:
+        if abs(X-item)<diff:
+            elem = item
+            diff = abs(X-item)
+    print(elem)
+    Py_Sem()
+def Task19():
+    """
+    Дан список чисел. Определите, сколько в нем
+    встречается различных чисел.
+    Input: [1, 1, 2, 0, -1, 3, 4, 4]
+    Output: 6
+    """
+    print("ЗАДАЧА 19")
+    from random import randint
+    list_1 = [i for i in range(randint(5, 10))]
+    print(list_1)
+    k = int(input("Введите число k: "))
+    list_2 = []
+    for i in range(k, len(list_1)): list_2.append(list_1[i])
+    for i in range(k): list_2.append(list_1[i])
+    print(list_2)
+    q = input('Если хотите решить задачу с помощью рекурсии, нажмите "1": ')
+    match q:
+        case "1": 
+            def ShiftRec(list: list, x: int):
+                if x == 0: return list
+                temp = list[0]
+                for i in range(len(list)-1):
+                    list[i] = list[i+1]
+                list[-1] = temp
+                return ShiftRec(list, x-1)
+            print(list_1)
+            ShiftRec(list_1, k)
+            print(list_1)
+            Py_Sem() 
+        case _: Py_Sem() 
+def Task20():
+    """
+    В настольной игре Скрабл (Scrabble) каждая буква имеет определенную
+    ценность. Напишите программу, которая вычисляет стоимость введенного пользователем слова.
+    Будем считать, что на вход подается только одно слово, которое содержит либо только
+    английские, либо только русские буквы.
+    Input: ноутбук
+    Output: 12
+    """
+    dict = {
+        "a":1, "e":1, "i":1, "o":1, "u":1, "l":1, 
+        "n":1, "s":1, "t":1, "r":1,
+        "d":2, "g":2, "b":3, "c":3, "m":3, "p":3,
+        "f":4, "h":4, "v":4, "w":4, "y":4, "k":5,
+        "j":8, "x":8, "q":10, "z":10,
+        "а":1, "в":1, "е":1, "и":1, "н":1, "о":1, "р":1, "с":1, "т":1,
+        "д":2, "к":2, "л":2, "м":2, "п":2, "у":2,
+        "б":3, "г":3, "ё":3, "ь":3, "я":3, "й":4, "ы":4,
+        "ж":5, "з":5, "х":5, "ц":5, "ч":5,
+        "ш":8, "э":8, "ю":8, "ф":10, "щ":10, "ъ":10
+    }
+    word = input("Введите слово: ")
+    score = 0
+    try:
+        for char in word:
+            score+=dict[char]
+        print(score)
+    except KeyError:
+        print("Ошибка ввода!")
+    finally:    
+        Py_Sem()
+def Task21():
+    """
+    Напишите программу для печати всех уникальных
+    значений в словаре.
+    Input: [{"V": "S001"}, {"V": "S002"}, {"VI": "S001"},
+    {"VI": "S005"}, {"VII": " S005 "}, {" V ":" S009 "}, {" VIII
+    ":" S007 "}]
+    Output: {'S005', 'S002', 'S007', 'S001', 'S009'}
+    """
+    print("ЗАДАЧА 21")
+    dict = [{"V": "S001"}, 
+            {"V": "S002"}, 
+            {"VI": "S001"},
+            {"VI": "S005"}, 
+            {"VII": "S005"}, 
+            {"V": "S009"}, 
+            {"VIII":"S007"}]
+    list = []
+    for item in dict:
+        for k in item: 
+            if item[k] in list: continue
+            list.append(item[k])
+    print(list)
+    Py_Sem()
+def Task23():
+    """
+    Дан массив, состоящий из целых чисел. Напишите
+    программу, которая подсчитает количество
+    элементов массива, больших предыдущего (элемента
+    с предыдущим номером)
+    Input: [0, -1, 5, 2, 3]
+    Output: 2 (-1 < 5, 2 < 3)
+    """
+    print("ЗАДАЧА 23")
+    from random import randint
+    list_1 = [randint(-5, 5) for i in range(randint(5, 10))]
+    print(list_1)
+    list_2 = []
+    total = 0
+    for i in range(len(list_1)-1):
+        if list_1[i] < list_1[i+1]:
+            list_2.append(f"{list_1[i]} < {list_1[i+1]}")
+            total+=1
+    print(f"{total} {list_2}")
     Py_Sem()
 
 Py_Sem()
