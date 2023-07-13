@@ -27,8 +27,14 @@ def Py_Sem():
         case "23": Task23()
         case "24": Task24()
         case "25": Task25()
+        case "26": Task26()
         case "27": Task27()
+        case "28": Task28()
         case "29": Task29()
+        case "31": Task31()
+        case "33": Task33()
+        case "35": Task35()
+        case "37": Task37()
         case _:
             print('Неверный номер задачи!')
             Py_Sem()
@@ -568,7 +574,6 @@ def Task24():
         if berry_count > max_berry_count: max_berry_count = berry_count
     print(max_berry_count)
     Py_Sem()
-
 def Task25():
     """
     Напишите программу, которая принимает на вход
@@ -589,6 +594,22 @@ def Task25():
             count_dict[string[char]]=0
     print(string)
     Py_Sem() 
+def Task26():
+    """
+    Напишите программу, которая на вход принимает
+    два числа A и B, и возводит число А в целую степень B с
+    помощью рекурсии.
+    Input: 3 5 
+    Output: 243
+    """
+    print("ЗАДАЧА 26")
+    A = int(input("Введите число A: "))
+    B = int(input("Введите число B: "))
+    def get_pow(x, y):
+        if y == 1: return x
+        else: return x*get_pow(x, y-1)
+    print(get_pow(A, B))
+    Py_Sem()
 def Task27():
     """
     Пользователь вводит текст(строка). Словом считается
@@ -608,6 +629,22 @@ def Task27():
     for item in symbols:
         text.replace(item, " ")
     print(len(set(text.split())))
+    Py_Sem()
+def Task28():
+    """
+    Напишите рекурсивную функцию sum(a, b),
+    возвращающую сумму двух целых неотрицательных чисел. Из
+    всех арифметических операций допускаются только +1 и -1.
+    Также нельзя использовать циклы.
+    Input: 2 2
+    Output: 4
+    """
+    print("ЗАДАЧА 28")
+    A = int(input("Введите число A: "))
+    B = int(input("Введите число B: "))
+    def get_sum(x, y):
+        return x if y == 0 else get_sum(x+1, y-1)
+    print(get_sum(A, B))
     Py_Sem()
 def Task29():
     """
@@ -649,7 +686,82 @@ def Task29():
     Итого: 2 ошибки в коде у Вани и 3 ошибки у Пети.
     """ 
     Py_Sem()
-
+def Task31():
+    """
+    Последовательностью Фибоначчи называется
+    последовательность чисел a0, a1, ..., an, ..., где
+    a0 = 0, a1 = 1, ak = ak-1 + ak-2 (k > 1).
+    Требуется найти N-е число Фибоначчи
+    Input: 7
+    Output: 13
+    """
+    print("ЗАДАЧА 31")
+    N = int(input("Введите число: "))
+    def fib(a):
+        return a if a==0 or a==1 else fib(a-1)+fib(a-2)
+    print(fib(N))
+    Py_Sem()
+def Task33():
+    """
+    Хакер Василий получил доступ к классному журналу и
+    хочет заменить все свои минимальные оценки на
+    максимальные. Напишите программу, которая
+    заменяет оценки Василия, но наоборот: все
+    максимальные – на минимальные.
+    Input: 5 -> 1 3 3 3 4
+    Output: 1 3 3 3 1
+    """
+    from random import randint
+    print("ЗАДАЧА 33")
+    N = int(input("Введите количество оценок: "))
+    score = [randint(1, 5) for i in range(N)]
+    print(score)
+    new_score = []
+    for item in score:
+        if item == max(score): new_score.append(min(score))
+        else: new_score.append(item)
+    print(new_score)
+    Py_Sem()
+def Task35():
+    """
+    Напишите функцию, которая принимает одно число и
+    проверяет, является ли оно простым
+    Напоминание: Простое число - это число, которое
+    имеет 2 делителя: 1 и n(само число)
+    Input: 5
+    Output: yes
+    """
+    print("ЗАДАЧА 35")
+    N = int(input("Введите число: "))
+    flag = True
+    for i in range(2, N):
+        if N%i==0:
+            flag = False
+            break
+    print("yes") if flag else print("no")
+    Py_Sem()
+def Task37():
+    """
+    Дано натуральное число N и
+    последовательность из N элементов.
+    Требуется вывести эту последовательность в
+    обратном порядке.
+    Примечание. В программе запрещается
+    объявлять массивы и использовать циклы
+    (даже для ввода и вывода).
+    Input: 2 -> 3 4
+    Output: 4 3
+    """
+    print("ЗАДАЧА 37")
+    N = int(input("Введите количество элементов N: "))
+    def rec_output(x):
+        if x == 0: return
+        num = int(input("Введите число: "))
+        rec_output(x-1)
+        print(num, end=" ")
+    rec_output(N)
+    print()
+    Py_Sem()
 
 
 Py_Sem()
