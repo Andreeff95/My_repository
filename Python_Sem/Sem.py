@@ -476,7 +476,7 @@ def Task20():
         for char in word:
             score+=dict[char]
         print(score)
-    except amicable_numError:
+    except KeyError:
         print("Ошибка ввода!")
     finally:    
         Py_Sem()
