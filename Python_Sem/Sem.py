@@ -35,12 +35,17 @@ def Py_Sem():
         case "31": Task31()
         case "32": Task32()
         case "33": Task33()
+        case "34": Task34()
         case "35": Task35()
+        case "36": Task36()
         case "37": Task37()
         case "39": Task39()
         case "41": Task41()
         case "43": Task43()
         case "45": Task45()
+        case "47": Task47()
+        case "49": Task49()
+        case "51": Task51()
         case _:
             print('Неверный номер задачи!')
             Py_Sem()
@@ -762,6 +767,39 @@ def Task33():
         else: new_score.append(item)
     print(new_score)
     Py_Sem()
+def Task34():
+    """
+    Винни-Пух попросил Вас посмотреть, есть ли в его стихах ритм. Поскольку
+    разобраться в его кричалках не настолько просто, насколько легко он их придумывает, Вам
+    стоит написать программу. Винни-Пух считает, что ритм есть, если число слогов (т.е. число
+    гласных букв) в каждой фразе стихотворения одинаковое. Фраза может состоять из одного
+    слова, если во фразе несколько слов, то они разделяются дефисами. Фразы отделяются друг
+    от друга пробелами. Стихотворение Винни-Пух вбивает в программу с клавиатуры. В ответе
+    напишите “Парам пам-пам”, если с ритмом все в порядке и “Пам парам”, если с ритмом все не
+    в порядке.
+    Input: пара-ра-рам рам-пам-папам па-ра-па-дам
+    Output: Парам пам-пам
+    """
+    print("ЗАДАЧА 34")
+    text = "пара-ра-рам рам-пам-папам па-ра-па-дам"
+    text = text.split(" ")
+    def syllable(text):
+        syllable_count = []
+        for line in text:
+            sum_syllable = 0
+            for char in line:
+                if char in "уеыаоэяию": sum_syllable+=1
+            syllable_count.append(sum_syllable)
+        return syllable_count
+    def rhythm_check(arr):
+        for i in range(len(arr)-1):
+            if arr[i]!=arr[i+1]: return False
+        return True
+    if rhythm_check(syllable(text)):
+        print("Парам пам-пам")
+    else:
+        print("Пам парам")
+    Py_Sem()
 def Task35():
     """
     Напишите функцию, которая принимает одно число и
@@ -780,6 +818,34 @@ def Task35():
             break
     print("yes") if flag else print("no")
     Py_Sem()
+def Task36():
+    """
+    Напишите функцию print_operation_table(operation, num_rows=6, num_columns=6),
+    которая принимает в качестве аргумента функцию, вычисляющую элемент по номеру строки и
+    столбца. Аргументы num_rows и num_columns указывают число строк и столбцов таблицы,
+    которые должны быть распечатаны. Нумерация строк и столбцов идет с единицы (подумайте,
+    почему не с нуля). Примечание: бинарной операцией называется любая операция, у которой
+    ровно два аргумента, как, например, у операции умножения.
+    Input: print_operation_table(lambda x, y: x * y) 
+    Output:
+    1 2 3 4 5 6
+    2 4 6 8 10 12
+    3 6 9 12 15 18
+    4 8 12 16 20 24
+    5 10 15 20 25 30
+    6 12 18 24 30 36 
+    """
+    print("ЗАДАЧА 36")
+    num_rows = int(input("Введите количество строк: "))
+    num_columns = int(input("Введите количество столбцов: "))
+    def print_operation_table(operation,  row=num_rows, column=num_columns):
+        matrix = [[[operation(x, y)] for y in range(1, column+1)] for x in range(1, row+1)]
+        for i in range(row):
+            for j in range(column):
+                print(*matrix[i][j], end=" ")
+            print()
+    print_operation_table(lambda x, y: x*y)
+    
 def Task37():
     """
     Дано натуральное число N и
@@ -901,5 +967,106 @@ def Task45():
             if i == dict_num_sum[amicable_num] and dict_num_sum[i] == amicable_num and dict_num_sum[amicable_num]!=dict_num_sum[i]:
                 print(dict_num_sum[i], dict_num_sum[amicable_num])
     Py_Sem()
+def Task47():
+    """
+    У вас есть код, который вы не можете менять (так часто бывает, когда код в глубине
+    программы используется множество раз и вы не хотите ничего сломать):
+    transformation = <???>
+    values = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29] # или любой другой список
+    transormed_values = list(map(transformation, values))
+    Единственный способ вашего взаимодействия с этим кодом - посредством задания
+    функции transformation.
+    Однако вы поняли, что для вашей текущей задачи вам не нужно никак преобразовывать
+    список значений, а нужно получить его как есть.
+    Напишите такое лямбда-выражение transformation, чтобы transformed_values получился
+    копией values.
+    INPUT:
+        values = [1, 23, 42, ‘asdfg’]
+        transformed_values = list(map(trasformation, values))
+        if values == transformed_values:
+            print(‘ok’)
+        else:
+            print(‘fail’)
+    OUTPUT:
+        ok
+    """
+    print("ЗАДАЧА 47")
+    transformation = lambda x: x
+    values = [1, 23, 42, "asdfg"]
+    transformed_values = list(map(transformation, values))
+    if values == transformed_values:
+        print("ok")
+    else:
+        print("fail")
+        Py_Sem()
+def Task49():
+    """
+    Планеты вращаются вокруг звезд по эллиптическим орбитам.
+    Назовем самой далекой планетой ту, орбита которой имеет
+    самую большую площадь. Напишите функцию
+    find_farthest_orbit(list_of_orbits), которая среди списка орбит
+    планет найдет ту, по которой вращается самая далекая
+    планета. Круговые орбиты не учитывайте: вы знаете, что у
+    вашей звезды таких планет нет, зато искусственные спутники
+    были были запущены на круговые орбиты. Результатом
+    функции должен быть кортеж, содержащий длины полуосей
+    эллипса орбиты самой далекой планеты. Каждая орбита
+    представляет из себя кортеж из пары чисел - полуосей ее
+    эллипса. Площадь эллипса вычисляется по формуле S = pi*a*b,
+    где a и b - длины полуосей эллипса. При решении задачи
+    используйте списочные выражения. Подсказка: проще всего
+    будет найти эллипс в два шага: сначала вычислить самую
+    большую площадь эллипса, а затем найти и сам эллипс,
+    имеющий такую площадь. Гарантируется, что самая далекая
+    планета ровно одна
+    INPUT: 
+        orbits = [(1, 3), (2.5, 10), (7, 2), (6, 6), (4, 3)]
+        print(*find_farthest_orbit(orbits))
+    OUTPUT: 
+        2.5 10
+    """
+    print("ЗАДАЧА 49")
+    # def find_farthest_orbit(array):
+    #     max_S = 3.14 * array[0][0] * array[0][1]
+    #     max_orbit = array[0]
+    #     for x in range(len(array)):
+    #         if 3.14 * array[x][0] * array[x][1] > max_S and array[x][0] != array[x][1]:
+    #             max_S = 3.14 * array[x][0] * array[x][1]
+    #             max_orbit = array[x]
+    #     return max_orbit
+    def find_farthest_orbit(arr):
+        return max(arr, key=lambda x: (x[0]!=x[1])*x[0]*x[1]*3.14)
+    orbits = [(1, 3), (2.5, 10), (7, 2), (6, 6), (4, 3)]
+    print(*find_farthest_orbit(orbits))
+    Py_Sem()
+def Task51():
+    """
+    Напишите функцию same_by(characteristic, objects), которая
+    проверяет, все ли объекты имеют одинаковое значение
+    некоторой характеристики, и возвращают True, если это так.
+    Если значение характеристики для разных объектов
+    отличается - то False. Для пустого набора объектов, функция
+    должна возвращать True. Аргумент characteristic - это
+    функция, которая принимает объект и вычисляет его
+    характеристику.
+    Input:
+        values = [0, 2, 10, 6] 
+        if same_by(lambda x: x % 2, values):
+            print(‘same’)
+        else:
+            print(‘different’)
+    Output:
+        same
+    """
+    print("ЗАДАЧА 51")
+    def same_by(char, val):
+        return True if len(val) == len(list(filter(char, val))) or len(list(filter(char, val))) == 0 else False
+    values = [0, 2, 10, 6] 
+    if same_by(lambda x: x % 2, values):
+        print('same')
+    else:
+        print('different')
+    Py_Sem()
+
 
 Py_Sem()
