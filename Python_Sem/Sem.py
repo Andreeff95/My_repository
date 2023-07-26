@@ -39,6 +39,7 @@ def Py_Sem():
         case "35": Task35()
         case "36": Task36()
         case "37": Task37()
+        case "38": Task38()
         case "39": Task39()
         case "41": Task41()
         case "43": Task43()
@@ -845,7 +846,7 @@ def Task36():
                 print(*matrix[i][j], end=" ")
             print()
     print_operation_table(lambda x, y: x*y)
-    
+    Py_Sem()
 def Task37():
     """
     Дано натуральное число N и
@@ -868,6 +869,122 @@ def Task37():
     rec_output(N)
     print()
     Py_Sem()
+def Task38():
+    """
+    Создать телефонный справочник с
+    возможностью импорта и экспорта данных в
+    формате .txt. Фамилия, имя, отчество, номер
+    телефона - данные, которые должны находиться
+    в файле.
+    1. Программа должна выводить данные
+    2. Программа должна сохранять данные в
+    текстовом файле
+    3. Пользователь может ввести одну из
+    характеристик для поиска определенной
+    записи (Например имя или фамилию
+    человека)
+    4. Использование функций. Ваша программа
+    не должна быть линейной
+    Дополнить телефонный справочник возможностью изменения 
+    и удаления данных. Пользователь также может ввести 
+    имя или фамилию, и Вы должны реализовать функционал
+    для изменения и удаления данных.
+    """
+    import os
+    os.chdir(path=r'C:\Users\Acer Nitro 5\Desktop\G.I.T.\Python_Sem')
+    print("ЗАДАЧА 38") 
+    def PhoneBookMenu():
+        print()
+        print("Доступные функции: ")
+        print("1. Вывод всех данных.")
+        print("2. Поиск нужной записи.")
+        print("3. Добавить новые данные.")
+        print("4. Изменить имеющиеся данные.")
+        print("5. Удалить имеющиеся данные.")
+        task = input('Введите номер функции. Для закрытия программы введите "0": ')
+        match task:
+            case "0": print('Закрытие программы...')
+            case "1": PrintPhoneBook()
+            case "2": SearchNote()
+            case "3": AddNewNote()
+            case "4": ChangeNote()
+            case "5": DeleteNote()
+            case _: PhoneBookMenu()
+    def ReadPhoneBook():
+        dict=[]
+        with open("phonebook.txt", encoding="utf-8") as data:
+            for line in data:
+                new_note = []
+                line_list = line.split()
+                new_note.append({"number":line_list[0], "name":line_list[1], "surname":line_list[2], "patronymic":line_list[3]})
+                dict.append(new_note)
+        return dict
+    def PrintPhoneBook():
+        data = ReadPhoneBook()
+        for note in data:
+            print(*note)                
+        PhoneBookMenu()
+    def SearchInBook():
+        search = input("Введите номер, фамилию, имя или отчество, которое хотите найти: ")
+        data = ReadPhoneBook()
+        count = 0
+        for note in data:
+            for item in note:
+                if search == item["number"] or search == item["name"] or search == item["surname"] or search == item["patronymic"]:
+                    print("Запись найдена!")
+                    return count
+            count+=1
+        return -1
+    def SearchNote():
+        data = ReadPhoneBook()
+        res = SearchInBook()
+        if(res==-1): print("Запись не найдена")
+        else:
+            print(*data[res])
+        PhoneBookMenu()
+    def RewritePhoneBook(data):
+        with open("phonebook.txt", 'w', encoding="utf-8") as new_data:
+            for i in range(len(data)):
+                for j in range(len(data[i])):
+                    new_data.write(data[i][j]["number"]+" ")
+                    new_data.write(data[i][j]["name"]+" ")
+                    new_data.write(data[i][j]["surname"]+" ")
+                    new_data.write(data[i][j]["patronymic"]+" ")
+                new_data.write('\n')
+    def AddNewNote():
+        data = ReadPhoneBook()
+        new_note = []
+        new_note.append({"number":input("Введите номер: "), "name":input("Введите имя: "), "surname":input("Введите фамилию: "), "patronymic":input("Введите отчество: ")})
+        data.append(new_note)
+        RewritePhoneBook(data)
+        PhoneBookMenu()
+    def ChangeNote():
+        data = ReadPhoneBook()
+        res = SearchInBook()
+        if(res==-1): print("Запись не найдена")
+        else:
+            print(*data[res])
+            data[res][0]["number"] = input("Введите новый номер: ")
+            data[res][0]["name"] = input("Введите новое имя: ")
+            data[res][0]["surname"] = input("Введите новую фамилию: ")
+            data[res][0]["patronymic"] = input("Введите новое отчество: ")
+        RewritePhoneBook(data)
+        PhoneBookMenu()
+    def DeleteNote():
+        data = ReadPhoneBook()
+        res = SearchInBook()
+        if(res==-1): print("Запись не найдена")
+        else:
+            print(*data[res])
+            delete = input("Для удаления записи нажмите '1': ")
+            match delete:
+                case "1":
+                    data.pop(res)
+                    RewritePhoneBook(data)
+                    PhoneBookMenu()
+                case _: PhoneBookMenu()
+        PhoneBookMenu()
+    PhoneBookMenu()
 def Task39():
     """
     Даны два массива чисел. Требуется вывести те элементы
